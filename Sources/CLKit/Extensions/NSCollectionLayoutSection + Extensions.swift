@@ -10,7 +10,7 @@ import UIKit
 extension NSCollectionLayoutSection {
     // MARK: - Final Methods
     final public func setBackground(ofSection name: String) {
-        let kind = Helper.generateElementKind(name, .decoration)
+        let kind = CLHelper.generateElementKind(name, .decoration)
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: kind)
         self.decorationItems = [sectionBackgroundDecoration]
     }

@@ -46,7 +46,7 @@ public enum CompositionalLayoutGroupDirection {
     case horizontal
 }
 
-public class Helper {
+public class CLHelper {
     // MARK: - Public Methods
     public class func generateElementKind(_ sectionName: String, _ key: CompositionalLayoutElementKindKey) -> String {
         switch key {

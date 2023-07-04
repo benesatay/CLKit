@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - BaseCompositionalCollectionView
 
-public class BaseCompositionalCollectionView: UICollectionView {
+public class BaseCLCollectionView: UICollectionView {
     
     // MARK: - Private Properties
     private var diffableDataSource: DiffableDataSource?
@@ -75,8 +75,8 @@ public class BaseCompositionalCollectionView: UICollectionView {
     }
     
     public final func registerSupplementaryItem(_ item: SupplementaryRegistrationItem) {
-        let kind = Helper.generateElementKind(item.sectionName, item.element)
-        let identifier = Helper.generateIdentifier(item.sectionName, item.element)
+        let kind = CLHelper.generateElementKind(item.sectionName, item.element)
+        let identifier = CLHelper.generateIdentifier(item.sectionName, item.element)
         self.register(item.viewClass, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
     }
     
@@ -110,10 +110,10 @@ public class BaseCompositionalCollectionView: UICollectionView {
         guard let supplementaryItems else { return nil }
         for supplementaryItem in supplementaryItems {
             if self.identifiers?[section] == supplementaryItem.sectionName {
-                let elementKind = Helper.generateElementKind(supplementaryItem.sectionName,
+                let elementKind = CLHelper.generateElementKind(supplementaryItem.sectionName,
                                                                                    supplementaryItem.element)
                 if kind == elementKind {
-                    return Helper.generateIdentifier(supplementaryItem.sectionName,
+                    return CLHelper.generateIdentifier(supplementaryItem.sectionName,
                                                                            supplementaryItem.element)
                 }
             }
@@ -123,7 +123,7 @@ public class BaseCompositionalCollectionView: UICollectionView {
 }
 
 // MARK: - UICollectionViewDelegate
-extension BaseCompositionalCollectionView: UICollectionViewDelegate {
+extension BaseCLCollectionView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         ccvDelegate?.didItemSelected(at: indexPath)
     }

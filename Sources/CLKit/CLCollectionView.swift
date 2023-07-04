@@ -1,5 +1,5 @@
 //
-//  CompositionalCollectionView.swift
+//  CLCollectionView.swift
 //  iosTurknet
 //
 //  Created by Bahadır Enes Atay on 26.06.2023.
@@ -9,9 +9,9 @@ import SnapKit
 
 open class CLCollectionView: UIView {
     
-    public lazy var collectionView: BaseCompositionalCollectionView = {
+    public lazy var collectionView: BaseCLCollectionView = {
         let layout = createLayout()
-        let view = BaseCompositionalCollectionView(collectionViewLayout: layout)
+        let view = BaseCLCollectionView(collectionViewLayout: layout)
         view.backgroundColor = .clear
         return view
     }()
