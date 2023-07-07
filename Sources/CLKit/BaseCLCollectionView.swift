@@ -46,17 +46,7 @@ public class BaseCLCollectionView: UICollectionView {
             }
         )
         
-        diffableDataSource?.supplementaryViewProvider = {(collectionView: UICollectionView,
-                                                          kind: String,
-                                                          indexPath: IndexPath) -> UICollectionReusableView? in
-            
-            guard let identifier = self.configureSupplementaryViewIdentifier(in: indexPath.section,
-                                                                             kind: kind) else { return nil }
-            return self.configureSupplementaryView(of: collectionView,
-                                                   kind: kind,
-                                                   identifier: identifier,
-                                                   at: indexPath)
-        }
+        configureSupplementaryViewProvider()
         applySnapshot()
     }
     
@@ -81,6 +71,20 @@ public class BaseCLCollectionView: UICollectionView {
     }
     
     // MARK: - Private Methods
+    private func configureSupplementaryViewProvider() {
+        diffableDataSource?.supplementaryViewProvider = {(collectionView: UICollectionView,
+                                                          kind: String,
+                                                          indexPath: IndexPath) -> UICollectionReusableView? in
+            
+            guard let identifier = self.configureSupplementaryViewIdentifier(in: indexPath.section,
+                                                                             kind: kind) else { return nil }
+            return self.configureSupplementaryView(of: collectionView,
+                                                   kind: kind,
+                                                   identifier: identifier,
+                                                   at: indexPath)
+        }
+    }
+    
     private func applySnapshot() {
         var snapshot = DiffableDataSourceSnapshot()
         ccvDelegate?.configureSnapshot(snapshot: &snapshot)
