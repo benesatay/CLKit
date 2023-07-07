@@ -87,7 +87,7 @@ public class BaseCLCollectionView: UICollectionView {
     
     private func applySnapshot() {
         var snapshot = DiffableDataSourceSnapshot()
-        ccvDelegate?.configureSnapshot(snapshot: &snapshot)
+        ccvDelegate?.configureSnapshot(snapshot: snapshot)
         diffableDataSource?.apply(snapshot)
     }
     

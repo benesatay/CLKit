@@ -17,7 +17,7 @@ public protocol CCVCellDelegate: AnyObject {
 public protocol CCVLayoutDelegate: AnyObject {
     func configureLayout(at sectionIndex: Int) -> NSCollectionLayoutSection?
     func configureLayoutConfig(_ config: UICollectionViewCompositionalLayoutConfiguration)
-    func configureSnapshot(snapshot: inout DiffableDataSourceSnapshot)
+    func configureSnapshot(snapshot: DiffableDataSourceSnapshot)
 }
 
 public protocol CCVDecorationViewDelegate: AnyObject {
