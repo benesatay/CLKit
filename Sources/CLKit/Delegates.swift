@@ -12,6 +12,7 @@ public typealias CCVDelegate = (CCVCellDelegate & CCVDecorationViewDelegate & CC
 public protocol CCVCellDelegate: AnyObject {
     func setupCell(_ cell: UICollectionViewCell, at indexPath: IndexPath)
     func didItemSelected(at indexPath: IndexPath)
+    func configureSnapshot(snapshot: inout DiffableDataSourceSnapshot)
 }
 
 public protocol CCVDecorationViewDelegate: AnyObject {
