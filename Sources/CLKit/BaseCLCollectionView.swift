@@ -23,7 +23,7 @@ open class BaseCLCollectionView: UICollectionView {
     public weak var ccvDelegate: CCVDelegate?
 
     // MARK: - Init
-    init(collectionViewLayout layout: UICollectionViewLayout) {
+    public init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: .zero, collectionViewLayout: layout)
         setupViews()
     }
