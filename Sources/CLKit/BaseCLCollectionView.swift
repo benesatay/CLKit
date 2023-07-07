@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - BaseCompositionalCollectionView
 
-public class BaseCLCollectionView: UICollectionView {
+open class BaseCLCollectionView: UICollectionView {
     
     // MARK: - Private Properties
     private var diffableDataSource: DiffableDataSource?
@@ -28,7 +28,7 @@ public class BaseCLCollectionView: UICollectionView {
         setupViews()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
