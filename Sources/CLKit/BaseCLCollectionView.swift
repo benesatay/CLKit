@@ -20,7 +20,7 @@ open class BaseCLCollectionView: UICollectionView {
     private var supplementaryItems: [SupplementaryRegistrationItem]?
 
     // MARK: - Public Properties
-    weak var ccvDelegate: CCVDelegate?
+    public weak var ccvDelegate: CCVDelegate?
 
     // MARK: - Init
     init(collectionViewLayout layout: UICollectionViewLayout) {
