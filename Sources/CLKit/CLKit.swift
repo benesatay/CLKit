@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class CLKit: BaseCLCollectionView {
+open class CLKit: CLCollectionView {
     
     public override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)

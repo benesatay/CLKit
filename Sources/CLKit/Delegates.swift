@@ -7,18 +7,18 @@
 
 import UIKit
 
-public typealias CCVDelegate = (CCVCellDelegate & CCVDecorationViewDelegate & CCVSupplementaryItemDelegate)
+public typealias CLDelegate = (CLCellDelegate & CLDecorationViewDelegate & CLSupplementaryItemDelegate)
 
-public protocol CCVCellDelegate: AnyObject {
+public protocol CLCellDelegate: AnyObject {
     func setupCell(_ cell: UICollectionViewCell, at indexPath: IndexPath)
     func didItemSelected(at indexPath: IndexPath)
     func configureSnapshot(snapshot: inout DiffableDataSourceSnapshot)
 }
 
-public protocol CCVDecorationViewDelegate: AnyObject {
+public protocol CLDecorationViewDelegate: AnyObject {
     func registerLayoutDecorationView(_ layout: UICollectionViewCompositionalLayout)
 }
 
-public protocol CCVSupplementaryItemDelegate: AnyObject {
+public protocol CLSupplementaryItemDelegate: AnyObject {
     func setupSupplementaryItem(_ view: UICollectionReusableView, in section: Int)
 }

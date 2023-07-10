@@ -8,7 +8,8 @@
 import UIKit
 
 extension NSCollectionLayoutSection {
-    // MARK: - Final Methods
+    
+    // MARK: - Public Final Methods
     final public func setBackground(ofSection name: String) {
         let kind = CLHelper.generateElementKind(name, .decoration)
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: kind)
@@ -33,7 +34,7 @@ extension NSCollectionLayoutSection {
         appendSectionSupplementaryItems(sectionHeader)
     }
     
-    final public func updaLayoutSection(group: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
+    final public func updateLayoutSection(group: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
         return NSCollectionLayoutSection(group: group)
     }
     

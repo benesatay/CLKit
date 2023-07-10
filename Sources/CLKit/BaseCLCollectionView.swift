@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - BaseCompositionalCollectionView
 
-open class BaseCLCollectionView: UICollectionView {
+open class CLCollectionView: UICollectionView {
     
     // MARK: - Private Properties
     private var diffableDataSource: DiffableDataSource?
@@ -20,7 +20,7 @@ open class BaseCLCollectionView: UICollectionView {
     private var supplementaryItems: [SupplementaryRegistrationItem]?
 
     // MARK: - Public Properties
-    public weak var ccvDelegate: CCVDelegate?
+    public weak var ccvDelegate: CLDelegate?
 
     // MARK: - Init
     public init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -32,12 +32,12 @@ open class BaseCLCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public Methods
+    // MARK: - Open Methods
     open func setupViews() {
         backgroundColor = .clear
     }
     
-    // MARK: - Final Methods
+    // MARK: - Public Final Methods
     public final func configureDataSource() {
         diffableDataSource = UICollectionViewDiffableDataSource(
             collectionView: self,
@@ -127,7 +127,7 @@ open class BaseCLCollectionView: UICollectionView {
 }
 
 // MARK: - UICollectionViewDelegate
-extension BaseCLCollectionView: UICollectionViewDelegate {
+extension CLCollectionView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         ccvDelegate?.didItemSelected(at: indexPath)
     }
