@@ -25,6 +25,7 @@ open class CLCollectionView: UICollectionView {
     // MARK: - Init
     public init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: .zero, collectionViewLayout: layout)
+        delegate = self
         setupViews()
     }
     
