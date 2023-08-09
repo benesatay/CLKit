@@ -42,8 +42,8 @@ open class CLCollectionView: UICollectionView {
     public final func configureDataSource() {
         diffableDataSource = UICollectionViewDiffableDataSource(
             collectionView: self,
-            cellProvider: { collectionView, indexPath, _ in
-                return self.configureCell(of: collectionView, at: indexPath)
+            cellProvider: { collectionView, indexPath, item in
+                return self.configureCell(of: collectionView, at: indexPath, item: item)
             }
         )
         
@@ -93,10 +93,11 @@ open class CLCollectionView: UICollectionView {
     }
     
     private func configureCell(of collectionView: UICollectionView,
-                               at indexPath: IndexPath) -> UICollectionViewCell {
+                               at indexPath: IndexPath,
+                               item: AnyHashable) -> UICollectionViewCell {
         guard let identifier = identifiers?[indexPath.section] else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        ccvDelegate?.setupCell(cell, at: indexPath)
+        ccvDelegate?.setupCell(cell, at: indexPath, item: item)
         return cell
     }
     

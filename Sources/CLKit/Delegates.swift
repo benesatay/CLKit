@@ -10,7 +10,7 @@ import UIKit
 public typealias CLDelegate = (CLCellDelegate & CLDecorationViewDelegate & CLSupplementaryItemDelegate)
 
 public protocol CLCellDelegate: AnyObject {
-    func setupCell(_ cell: UICollectionViewCell, at indexPath: IndexPath)
+    func setupCell(_ cell: UICollectionViewCell, at indexPath: IndexPath, item: AnyHashable)
     func didItemSelected(at indexPath: IndexPath)
     func configureSnapshot(snapshot: inout DiffableDataSourceSnapshot)
 }
