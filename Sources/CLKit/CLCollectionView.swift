@@ -20,7 +20,7 @@ open class CLCollectionView: UICollectionView {
     private var supplementaryItems: [SupplementaryRegistrationItem]?
 
     // MARK: - Public Properties
-    public weak var ccvDelegate: CLDelegate?
+    public weak var clDelegate: CLDelegate?
 
     // MARK: - Init
     public init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -88,7 +88,7 @@ open class CLCollectionView: UICollectionView {
     
     private func applySnapshot() {
         var snapshot = DiffableDataSourceSnapshot()
-        ccvDelegate?.configureSnapshot(snapshot: &snapshot)
+        clDelegate?.configureSnapshot(snapshot: &snapshot)
         diffableDataSource?.apply(snapshot)
     }
     
@@ -97,7 +97,7 @@ open class CLCollectionView: UICollectionView {
                                item: AnyHashable) -> UICollectionViewCell {
         guard let identifier = identifiers?[indexPath.section] else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        ccvDelegate?.setupCell(cell, at: indexPath, item: item)
+        clDelegate?.setupCell(cell, at: indexPath, item: item)
         return cell
     }
     
@@ -108,7 +108,7 @@ open class CLCollectionView: UICollectionView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                    withReuseIdentifier: identifier,
                                                                    for: indexPath)
-        ccvDelegate?.setupSupplementaryItem(view, in: indexPath.section)
+        clDelegate?.setupSupplementaryItem(view, in: indexPath.section)
         return view
     }
     
@@ -131,6 +131,6 @@ open class CLCollectionView: UICollectionView {
 // MARK: - UICollectionViewDelegate
 extension CLCollectionView: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        ccvDelegate?.didItemSelected(at: indexPath)
+        clDelegate?.didItemSelected(at: indexPath)
     }
 }

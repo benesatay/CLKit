@@ -115,10 +115,8 @@ extension NSCollectionLayoutSection {
         }
     }
     
-    // MARK: - Private Methods
-    
     // MARK: - Group
-    private class func createVerticalLayoutGroup(item: NSCollectionLayoutItem,
+    public class func createVerticalLayoutGroup(item: NSCollectionLayoutItem,
                                                  groupLayoutSize: NSCollectionLayoutSize) -> NSCollectionLayoutGroup {
         if #available(iOS 16.0, *) {
             return NSCollectionLayoutGroup.vertical(layoutSize: groupLayoutSize, repeatingSubitem: item, count: 1)
@@ -127,7 +125,7 @@ extension NSCollectionLayoutSection {
         }
     }
     
-    private class func createHorizontalLayoutGroup(item: NSCollectionLayoutItem,
+    public class func createHorizontalLayoutGroup(item: NSCollectionLayoutItem,
                                                    groupLayoutSize: NSCollectionLayoutSize) -> NSCollectionLayoutGroup {
         if #available(iOS 16.0, *) {
             return NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, repeatingSubitem: item, count: 1)
@@ -135,4 +133,8 @@ extension NSCollectionLayoutSection {
             return NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitem: item, count: 1)
         }
     }
+    
+    // MARK: - Private Methods
+    
+  
 }
