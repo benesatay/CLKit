@@ -13,7 +13,7 @@ import UIKit
 open class CLCollectionView: UICollectionView {
     
     // MARK: - Private Properties
-    private var diffableDataSource: DiffableDataSource?
+    public var diffableDataSource: DiffableDataSource?
     
     private var identifiers: [String]?
     
