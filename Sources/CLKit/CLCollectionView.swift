@@ -74,7 +74,7 @@ open class CLCollectionView: UICollectionView {
                                                    identifier: identifier,
                                                    at: indexPath)
         }
-        self.collectionViewLayout.invalidateLayout()
+//        self.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - Private Methods
