@@ -15,10 +15,6 @@ open class CLCollectionView: UICollectionView {
     // MARK: - Private Properties
     public var diffableDataSource: DiffableDataSource?
     
-    private var identifiers: [String]?
-    
-    private var supplementaryItems: [SupplementaryRegistrationItem]?
-
     // MARK: - Public Properties
     public weak var clDelegate: CLDelegate?
 
@@ -52,14 +48,12 @@ open class CLCollectionView: UICollectionView {
     }
     
     public final func registerCells(_ info: [CellRegistrationItem]) {
-        identifiers = info.compactMap({$0.identifier})
         for item in info {
             self.register(item.metatype, forCellWithReuseIdentifier: item.identifier)
         }
     }
     
     public final func registerSupplementaryItems(_ items: [SupplementaryRegistrationItem]) {
-        supplementaryItems = items
         for item in items {
             registerSupplementaryItem(item)
         }
@@ -76,7 +70,6 @@ open class CLCollectionView: UICollectionView {
         diffableDataSource?.supplementaryViewProvider = {(collectionView: UICollectionView,
                                                           kind: String,
                                                           indexPath: IndexPath) -> UICollectionReusableView? in
-            
             guard let identifier = self.configureSupplementaryViewIdentifier(in: indexPath.section,
                                                                              kind: kind) else { return nil }
             return self.configureSupplementaryView(of: collectionView,
@@ -85,7 +78,7 @@ open class CLCollectionView: UICollectionView {
                                                    at: indexPath)
         }
     }
-    
+   
     private func applySnapshot() {
         var snapshot = DiffableDataSourceSnapshot()
         clDelegate?.configureSnapshot(snapshot: &snapshot)
@@ -95,10 +88,7 @@ open class CLCollectionView: UICollectionView {
     private func configureCell(of collectionView: UICollectionView,
                                at indexPath: IndexPath,
                                item: AnyHashable) -> UICollectionViewCell {
-        guard let identifier = identifiers?[indexPath.section] else { return UICollectionViewCell() }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        clDelegate?.setupCell(cell, at: indexPath, item: item)
-        return cell
+        return clDelegate?.setupCell(for: item, at: indexPath) ?? UICollectionViewCell()
     }
     
     private func configureSupplementaryView(of collectionView: UICollectionView,
@@ -113,18 +103,19 @@ open class CLCollectionView: UICollectionView {
     }
     
     private func configureSupplementaryViewIdentifier(in section: Int, kind: String) -> String? {
-        guard let supplementaryItems else { return nil }
-        for supplementaryItem in supplementaryItems {
-            if self.identifiers?[section] == supplementaryItem.sectionName {
-                let elementKind = CLHelper.generateElementKind(supplementaryItem.sectionName,
-                                                                                   supplementaryItem.element)
-                if kind == elementKind {
-                    return CLHelper.generateIdentifier(supplementaryItem.sectionName,
-                                                                           supplementaryItem.element)
-                }
-            }
-        }
-        return nil
+        return clDelegate?.configureSupplementaryViewIdentifier(in: section, kind: kind)
+//        guard let supplementaryItems else { return nil }
+//        for supplementaryItem in supplementaryItems {
+//            if self.identifiers?[section] == supplementaryItem.sectionName {
+//                let elementKind = CLHelper.generateElementKind(supplementaryItem.sectionName,
+//                                                                                   supplementaryItem.element)
+//                if kind == elementKind {
+//                    return CLHelper.generateIdentifier(supplementaryItem.sectionName,
+//                                                                           supplementaryItem.element)
+//                }
+//            }
+//        }
+//        return nil
     }
 }
 
