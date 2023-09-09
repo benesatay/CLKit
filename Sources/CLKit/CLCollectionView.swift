@@ -65,8 +65,7 @@ open class CLCollectionView: UICollectionView {
         self.register(item.viewClass, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
     }
     
-    // MARK: - Private Methods
-    private func configureSupplementaryViewProvider() {
+    public final func configureSupplementaryViewProvider() {
         diffableDataSource?.supplementaryViewProvider = {(collectionView: UICollectionView,
                                                           kind: String,
                                                           indexPath: IndexPath) -> UICollectionReusableView? in
@@ -77,7 +76,8 @@ open class CLCollectionView: UICollectionView {
                                                    at: indexPath)
         }
     }
-   
+    
+    // MARK: - Private Methods
     private func applySnapshot() {
         var snapshot = DiffableDataSourceSnapshot()
         clDelegate?.configureSnapshot(snapshot: &snapshot)
