@@ -50,20 +50,9 @@ open class CLCollectionView: UICollectionView {
             self.register(item.metatype, forCellWithReuseIdentifier: item.identifier)
         }
     }
-    
-    public final func registerSupplementaryItems(_ items: [SupplementaryRegistrationItem]) {
-        for item in items {
-            registerSupplementaryItem(item)
-        }
-    }
-    
-    public final func registerSupplementaryItem(_ item: SupplementaryRegistrationItem) {
-        let kind = CLHelper.generateElementKind(item.sectionName, item.element)
-        let identifier = CLHelper.generateIdentifier(item.sectionName, item.element)
-        self.register(item.viewClass, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
-    }
-    
-    public final func configureSupplementaryViewProvider() {
+
+    public final func configureSupplementaryViewProvider(with registrationItems: [SupplementaryRegistrationItem]) {
+        registerSupplementaryItems(registrationItems)
         guard let diffableDataSource else { return }
         diffableDataSource.supplementaryViewProvider = {(collectionView: UICollectionView,
                                                           kind: String,
@@ -74,10 +63,22 @@ open class CLCollectionView: UICollectionView {
                                                    identifier: identifier,
                                                    at: indexPath)
         }
-//        self.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - Private Methods
+    
+    private func registerSupplementaryItems(_ items: [SupplementaryRegistrationItem]) {
+        for item in items {
+            registerSupplementaryItem(item)
+        }
+    }
+    
+    private func registerSupplementaryItem(_ item: SupplementaryRegistrationItem) {
+        let kind = CLHelper.generateElementKind(item.sectionName, item.element)
+        let identifier = CLHelper.generateIdentifier(item.sectionName, item.element)
+        self.register(item.viewClass, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
+    }
+    
     private func applySnapshot() {
         var snapshot = DiffableDataSourceSnapshot()
         clDelegate?.configureSnapshot(snapshot: &snapshot)
