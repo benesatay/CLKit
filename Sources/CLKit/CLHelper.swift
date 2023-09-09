@@ -24,8 +24,8 @@ public typealias LayoutMultipleItemComponents = (items: [NSCollectionLayoutItem]
 // MARK: - Supplementary Registration Item
 public struct SupplementaryRegistrationItem {
     var viewClass: AnyClass?
-    var sectionName: String
-    var element: CompositionalLayoutElementKindKey = .header
+    public var sectionName: String
+    public var element: CompositionalLayoutElementKindKey = .header
     
     public init(viewClass: AnyClass? = nil, sectionName: String, element: CompositionalLayoutElementKindKey) {
         self.viewClass = viewClass
