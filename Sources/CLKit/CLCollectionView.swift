@@ -74,10 +74,7 @@ open class CLCollectionView: UICollectionView {
                                                    identifier: identifier,
                                                    at: indexPath)
         }
-        
-        var snapshot = diffableDataSource.snapshot()
-        snapshot.reloadSections(snapshot.sectionIdentifiers)
-        diffableDataSource.apply(snapshot)
+        self.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - Private Methods
