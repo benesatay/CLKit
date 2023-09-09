@@ -34,8 +34,6 @@ open class CLCollectionView: UICollectionView {
         backgroundColor = .clear
     }
     
-    private var hasSupplementaryItems: Bool = false
-    
     // MARK: - Public Final Methods
     public final func configureDataSource() {
         diffableDataSource = UICollectionViewDiffableDataSource(
@@ -44,8 +42,6 @@ open class CLCollectionView: UICollectionView {
                 return self.configureCell(of: collectionView, at: indexPath, item: item)
             }
         )
-        
-        guard hasSupplementaryItems == false else { return }
         applySnapshot()
     }
     
@@ -56,7 +52,6 @@ open class CLCollectionView: UICollectionView {
     }
     
     public final func registerSupplementaryItems(_ items: [SupplementaryRegistrationItem]) {
-        hasSupplementaryItems = true
         for item in items {
             registerSupplementaryItem(item)
         }
@@ -69,7 +64,8 @@ open class CLCollectionView: UICollectionView {
     }
     
     public final func configureSupplementaryViewProvider() {
-        diffableDataSource?.supplementaryViewProvider = {(collectionView: UICollectionView,
+        guard let diffableDataSource else { return }
+        diffableDataSource.supplementaryViewProvider = {(collectionView: UICollectionView,
                                                           kind: String,
                                                           indexPath: IndexPath) -> UICollectionReusableView? in
             guard let identifier = self.configureSupplementaryViewIdentifier(in: indexPath.section) else { return nil }
@@ -78,7 +74,10 @@ open class CLCollectionView: UICollectionView {
                                                    identifier: identifier,
                                                    at: indexPath)
         }
-        applySnapshot()
+        
+        var snapshot = diffableDataSource.snapshot()
+        snapshot.reloadSections(snapshot.sectionIdentifiers)
+        diffableDataSource.apply(snapshot)
     }
     
     // MARK: - Private Methods
