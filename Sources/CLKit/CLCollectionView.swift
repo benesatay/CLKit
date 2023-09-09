@@ -42,8 +42,6 @@ open class CLCollectionView: UICollectionView {
                 return self.configureCell(of: collectionView, at: indexPath, item: item)
             }
         )
-        
-        configureSupplementaryViewProvider()
         applySnapshot()
     }
     
