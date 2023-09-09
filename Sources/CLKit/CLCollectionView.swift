@@ -34,6 +34,8 @@ open class CLCollectionView: UICollectionView {
         backgroundColor = .clear
     }
     
+    private var hasSupplementaryItems: Bool = false
+    
     // MARK: - Public Final Methods
     public final func configureDataSource() {
         diffableDataSource = UICollectionViewDiffableDataSource(
@@ -42,6 +44,8 @@ open class CLCollectionView: UICollectionView {
                 return self.configureCell(of: collectionView, at: indexPath, item: item)
             }
         )
+        
+        guard hasSupplementaryItems == false else { return }
         applySnapshot()
     }
     
@@ -52,6 +56,7 @@ open class CLCollectionView: UICollectionView {
     }
     
     public final func registerSupplementaryItems(_ items: [SupplementaryRegistrationItem]) {
+        hasSupplementaryItems = true
         for item in items {
             registerSupplementaryItem(item)
         }
@@ -73,6 +78,7 @@ open class CLCollectionView: UICollectionView {
                                                    identifier: identifier,
                                                    at: indexPath)
         }
+        applySnapshot()
     }
     
     // MARK: - Private Methods
