@@ -20,6 +20,6 @@ public protocol CLDecorationViewDelegate: AnyObject {
 }
 
 public protocol CLSupplementaryItemDelegate: AnyObject {
-    func configureSupplementaryViewIdentifier(in section: Int, kind: String) -> String?
+    func configureSupplementaryViewIdentifier(in section: Int) -> String?
     func setupSupplementaryItem(_ view: UICollectionReusableView, in section: Int)
 }

@@ -70,8 +70,7 @@ open class CLCollectionView: UICollectionView {
         diffableDataSource?.supplementaryViewProvider = {(collectionView: UICollectionView,
                                                           kind: String,
                                                           indexPath: IndexPath) -> UICollectionReusableView? in
-            guard let identifier = self.configureSupplementaryViewIdentifier(in: indexPath.section,
-                                                                             kind: kind) else { return nil }
+            guard let identifier = self.configureSupplementaryViewIdentifier(in: indexPath.section) else { return nil }
             return self.configureSupplementaryView(of: collectionView,
                                                    kind: kind,
                                                    identifier: identifier,
@@ -88,7 +87,7 @@ open class CLCollectionView: UICollectionView {
     private func configureCell(of collectionView: UICollectionView,
                                at indexPath: IndexPath,
                                item: AnyHashable) -> UICollectionViewCell {
-        return clDelegate?.setupCell(for: item, at: indexPath) ?? UICollectionViewCell()
+        return clDelegate?.setupCell(for: item, of: collectionView, at: indexPath) ?? UICollectionViewCell()
     }
     
     private func configureSupplementaryView(of collectionView: UICollectionView,
@@ -102,20 +101,8 @@ open class CLCollectionView: UICollectionView {
         return view
     }
     
-    private func configureSupplementaryViewIdentifier(in section: Int, kind: String) -> String? {
-        return clDelegate?.configureSupplementaryViewIdentifier(in: section, kind: kind)
-//        guard let supplementaryItems else { return nil }
-//        for supplementaryItem in supplementaryItems {
-//            if self.identifiers?[section] == supplementaryItem.sectionName {
-//                let elementKind = CLHelper.generateElementKind(supplementaryItem.sectionName,
-//                                                                                   supplementaryItem.element)
-//                if kind == elementKind {
-//                    return CLHelper.generateIdentifier(supplementaryItem.sectionName,
-//                                                                           supplementaryItem.element)
-//                }
-//            }
-//        }
-//        return nil
+    private func configureSupplementaryViewIdentifier(in section: Int) -> String? {
+        return clDelegate?.configureSupplementaryViewIdentifier(in: section)
     }
 }
 
