@@ -26,11 +26,12 @@ public struct SupplementaryRegistrationItem {
     var viewClass: AnyClass?
     public var sectionName: String
     public var element: CompositionalLayoutElementKindKey = .header
-    
+    public var identifier: String
     public init(viewClass: AnyClass? = nil, sectionName: String, element: CompositionalLayoutElementKindKey) {
         self.viewClass = viewClass
         self.sectionName = sectionName
         self.element = element
+        self.identifier = CLHelper.generateIdentifier(sectionName, element)
     }
 }
 
